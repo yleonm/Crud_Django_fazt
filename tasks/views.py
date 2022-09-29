@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm  # crear formularios
 from django.contrib.auth.models import User
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.db import IntegrityError
 # Create your views here.
 
@@ -37,5 +37,6 @@ def tasks(request):
     return render(request, 'tasks.html')
 
 
-def logout(request):
-    return render(request, 'logout.html')
+def singout(request):
+    logout(request)
+    return redirect('home')
