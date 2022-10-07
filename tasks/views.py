@@ -1,3 +1,4 @@
+from ast import Try
 from django.shortcuts import render, redirect
 # crear formularios
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -44,11 +45,17 @@ def create_task(request):
             'form': TaskForm
         })
     else:
-        print(request.POST)
-        return render(request, 'create_task.html', {
-            'form': TaskForm
-        })
-
+        try:
+            form = TaskForm(request.POST)
+            new_task = form.save(commit=False)
+            new_task.user = request.user
+            new_task.save()
+            return redirect('tasks')
+        except ValueError:
+            return render(request, 'create_task.html', {
+                'form': TaskForm,
+                'error': 'Please provide valid data'
+                })
 
    
 
