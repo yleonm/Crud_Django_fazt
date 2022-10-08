@@ -1,4 +1,4 @@
-from ast import Try
+
 from django.shortcuts import render, redirect
 # crear formularios
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
 from django.db import IntegrityError
 from .forms import TaskForm
+from .models import Task
 # Create your views here.
 
 
@@ -37,7 +38,8 @@ def signup(request):
 
 
 def tasks(request):
-    return render(request, 'tasks.html')
+    tasks = Task.objects.filter(user = request.user, datecompleted__isnull=True) 
+    return render(request, 'tasks.html',{'tasks': tasks})
 
 def create_task(request):
     if request.method == 'GET':
@@ -74,8 +76,8 @@ def signin(request):
             request, username=request.POST['username'], password=request.POST['password'])
         if user is None:
             return render(request, 'signin.html', {
-            'form': AuthenticationForm,
-            'error' : 'Username or password is incorrect'
+                'form': AuthenticationForm,
+                'error' : 'Username or password is incorrect'
            })
         else:
             login(request, user)
