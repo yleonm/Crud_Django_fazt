@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Home</h1>
-
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus totam numquam necessitatibus quis quas similique vel, ut dolores aspernatur quia excepturi ex, distinctio inventore veritatis eveniet blanditiis corrupti. Inventore iste veniam numquam facilis adipisci libero omnis repellendus deserunt quisquam sunt, minus exercitationem. Deleniti ut minima sequi odit dolorum iusto? Sint.
-</p>
+<main class="container py-5">
+    <section class = "card card-body">
+        <h1 class = "display-1 text-center"> Task Aplication With Django</h1>
+        <p>Hello, here you can create, read, update and delete your daily personal tasks totally free, you just need to register with an email, welcome ...
+        </p>
+        <div class = "text-center">
+            <a class = "btn btn-secondary" href="/signin/">Signin</a>
+            <a class = "btn btn-secondary" href="/signup/">Signup</a>
+        </div>
+    </section>
+</main>
 {% endblock %}
